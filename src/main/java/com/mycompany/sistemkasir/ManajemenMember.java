@@ -26,21 +26,252 @@ public class ManajemenMember extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        LabelIdPelanggan = new javax.swing.JLabel();
+        LabelNamaPelanggan = new javax.swing.JLabel();
+        LabelNoHandphone = new javax.swing.JLabel();
+        LabelJenisKelamin = new javax.swing.JLabel();
+        LabelIdPenjualan = new javax.swing.JLabel();
+        JawabanIdPelanggan = new javax.swing.JTextField();
+        JawabanNamaPelanggan = new javax.swing.JTextField();
+        JawabanNoHandphone = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        JawabanIdPenjualan = new javax.swing.JTextField();
+        ButtonTambah = new javax.swing.JButton();
+        ButtonUbah = new javax.swing.JButton();
+        ButtonHapus = new javax.swing.JButton();
+        LabelCariPelanggan = new javax.swing.JLabel();
+        JawabanCariPelanggan = new javax.swing.JTextField();
+        ButtonPencarian = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        LabelDataPelanggan = new javax.swing.JLabel();
+        ButtonX = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
+        LabelIdPelanggan.setText("Id Pelanggan");
+
+        LabelNamaPelanggan.setText("Nama Pelanggan");
+
+        LabelNoHandphone.setText("No. Handphone");
+
+        LabelJenisKelamin.setText("Jenis Kelamin");
+
+        LabelIdPenjualan.setText("Id Penjualan");
+
+        JawabanNamaPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JawabanNamaPelangganActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jComboBox1.setSelectedItem(2);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        JawabanIdPenjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JawabanIdPenjualanActionPerformed(evt);
+            }
+        });
+
+        ButtonTambah.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonTambah.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonTambah.setText("Tambah");
+
+        ButtonUbah.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonUbah.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonUbah.setText("Ubah");
+
+        ButtonHapus.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonHapus.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonHapus.setText("Hapus");
+
+        LabelCariPelanggan.setText("Cari Pelanggan");
+
+        JawabanCariPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JawabanCariPelangganActionPerformed(evt);
+            }
+        });
+
+        ButtonPencarian.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\Tombol Pencarian.png")); // NOI18N
+        ButtonPencarian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonPencarianActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nama ", "No. Hp", "Jenis Kelamin", "Id Transaksi"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(ButtonHapus))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ButtonTambah)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(LabelNamaPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelIdPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelNoHandphone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelJenisKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelIdPenjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JawabanIdPelanggan)
+                                    .addComponent(JawabanNamaPelanggan)
+                                    .addComponent(JawabanNoHandphone)
+                                    .addComponent(jComboBox1, 0, 151, Short.MAX_VALUE)
+                                    .addComponent(JawabanIdPenjualan)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(ButtonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(LabelCariPelanggan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JawabanCariPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelIdPelanggan)
+                    .addComponent(JawabanIdPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelCariPelanggan)
+                    .addComponent(JawabanCariPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelNamaPelanggan)
+                            .addComponent(JawabanNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelNoHandphone)
+                            .addComponent(JawabanNoHandphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelJenisKelamin)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelIdPenjualan)
+                            .addComponent(JawabanIdPenjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ButtonTambah)
+                            .addComponent(ButtonUbah))
+                        .addGap(36, 36, 36)
+                        .addComponent(ButtonHapus))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
+
+        LabelDataPelanggan.setFont(new java.awt.Font("Malgun Gothic", 1, 24)); // NOI18N
+        LabelDataPelanggan.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDataPelanggan.setText("Data Pelanggan");
+
+        ButtonX.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonX.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\tombol x.png")); // NOI18N
+        ButtonX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonXActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addComponent(LabelDataPelanggan)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LabelDataPelanggan)
+                .addGap(26, 26, 26)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPencarianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonPencarianActionPerformed
+
+    private void JawabanCariPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanCariPelangganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JawabanCariPelangganActionPerformed
+
+    private void JawabanIdPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanIdPenjualanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JawabanIdPenjualanActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void JawabanNamaPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanNamaPelangganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JawabanNamaPelangganActionPerformed
+
+    private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +309,27 @@ public class ManajemenMember extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonHapus;
+    private javax.swing.JButton ButtonPencarian;
+    private javax.swing.JButton ButtonTambah;
+    private javax.swing.JButton ButtonUbah;
+    private javax.swing.JButton ButtonX;
+    private javax.swing.JTextField JawabanCariPelanggan;
+    private javax.swing.JTextField JawabanIdPelanggan;
+    private javax.swing.JTextField JawabanIdPenjualan;
+    private javax.swing.JTextField JawabanNamaPelanggan;
+    private javax.swing.JTextField JawabanNoHandphone;
+    private javax.swing.JLabel LabelCariPelanggan;
+    private javax.swing.JLabel LabelDataPelanggan;
+    private javax.swing.JLabel LabelIdPelanggan;
+    private javax.swing.JLabel LabelIdPenjualan;
+    private javax.swing.JLabel LabelJenisKelamin;
+    private javax.swing.JLabel LabelNamaPelanggan;
+    private javax.swing.JLabel LabelNoHandphone;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
