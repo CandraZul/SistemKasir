@@ -11,7 +11,7 @@ package com.mycompany.sistemkasir;
 public class ManajemenBarang extends javax.swing.JFrame {
 
     /**
-     * Creates new form ManajemenBarang
+     * Creates new form kasir
      */
     public ManajemenBarang() {
         initComponents();
@@ -32,7 +32,6 @@ public class ManajemenBarang extends javax.swing.JFrame {
         LabelKodeBarang = new javax.swing.JLabel();
         LabelNamaBarang = new javax.swing.JLabel();
         LabelMerek = new javax.swing.JLabel();
-        JawabanKodeBarang = new javax.swing.JTextField();
         JawabanNamaBarang = new javax.swing.JTextField();
         JawabanMerekBarang = new javax.swing.JTextField();
         LabelHargaBeli = new javax.swing.JLabel();
@@ -49,12 +48,10 @@ public class ManajemenBarang extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         ButtonPencarian = new javax.swing.JButton();
+        JawabanKodeBarang = new javax.swing.JTextField();
         ButtonX = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 153, 153));
-        setFocusableWindowState(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -67,12 +64,6 @@ public class ManajemenBarang extends javax.swing.JFrame {
         LabelNamaBarang.setText("Nama Barang    :");
 
         LabelMerek.setText("Merek                 :");
-
-        JawabanKodeBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JawabanKodeBarangActionPerformed(evt);
-            }
-        });
 
         JawabanNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,10 +124,15 @@ public class ManajemenBarang extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        ButtonPencarian.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\Tombol Pencarian.png")); // NOI18N
         ButtonPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonPencarianActionPerformed(evt);
+            }
+        });
+
+        JawabanKodeBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JawabanKodeBarangActionPerformed(evt);
             }
         });
 
@@ -154,12 +150,12 @@ public class ManajemenBarang extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(LabelKodeBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(LabelNamaBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LabelMerek, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                            .addComponent(LabelMerek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JawabanKodeBarang, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(JawabanNamaBarang)
-                            .addComponent(JawabanMerekBarang))
+                            .addComponent(JawabanNamaBarang, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(JawabanMerekBarang)
+                            .addComponent(JawabanKodeBarang))
                         .addGap(95, 95, 95)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LabelHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,9 +197,9 @@ public class ManajemenBarang extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelKodeBarang)
-                    .addComponent(JawabanKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelHargaBeli)
-                    .addComponent(JawabanHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JawabanHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JawabanKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelNamaBarang)
@@ -234,7 +230,6 @@ public class ManajemenBarang extends javax.swing.JFrame {
                 .addGap(44, 44, 44))
         );
 
-        ButtonX.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\tombol x.png")); // NOI18N
         ButtonX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonXActionPerformed(evt);
@@ -246,13 +241,13 @@ public class ManajemenBarang extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(721, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +259,18 @@ public class ManajemenBarang extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 740));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -289,13 +295,13 @@ public class ManajemenBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonPencarianActionPerformed
 
-    private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonXActionPerformed
-
     private void JawabanKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanKodeBarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JawabanKodeBarangActionPerformed
+
+    private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,6 +328,9 @@ public class ManajemenBarang extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ManajemenBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
