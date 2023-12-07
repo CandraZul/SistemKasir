@@ -24,11 +24,11 @@ public class ManajemenBarang extends javax.swing.JFrame {
      */
     public ManajemenBarang() {
         initComponents();
-        TableMember();
+        TabelBarang();
     }
     Connection connection = DatabaseConnection.getConnection();
     
-    public void TableMember(){
+    public void TabelBarang(){
         Statement statement = null;
         try{
             statement = connection.createStatement();
@@ -135,6 +135,11 @@ public class ManajemenBarang extends javax.swing.JFrame {
         ButtonUbah.setBackground(new java.awt.Color(0, 102, 102));
         ButtonUbah.setForeground(new java.awt.Color(255, 255, 255));
         ButtonUbah.setText("Ubah");
+        ButtonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonUbahActionPerformed(evt);
+            }
+        });
 
         ButtonHapus.setBackground(new java.awt.Color(0, 102, 102));
         ButtonHapus.setForeground(new java.awt.Color(255, 255, 255));
@@ -360,7 +365,13 @@ public class ManajemenBarang extends javax.swing.JFrame {
             preparedStatement.setInt(4, hargaJual);
             preparedStatement.setInt(5,quantity);
             preparedStatement.executeUpdate();
-            TableMember();
+            TabelBarang();
+            inputKodeBarang.setText("");
+            inputNamaBarang.setText("");
+            inputMerekBarang.setText("");
+            inputHargaBeli.setText("");
+            inputHargaJual.setText("");
+            inputQuantity.setText("");
         }catch(SQLException e){
             System.out.println(e);
             JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
@@ -369,11 +380,38 @@ public class ManajemenBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonTambahActionPerformed
 
     private void inputCariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCariBarangActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_inputCariBarangActionPerformed
 
     private void ButtonPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPencarianActionPerformed
-        // TODO add your handling code here:
+        String keySearch = inputCariBarang.getText();
+        
+//        Statement statement = null;
+        try{
+//            statement = connection.createStatement();
+            String sql = "SELECT * FROM data_barang WHERE nama_barang=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, keySearch);
+            ResultSet result = preparedStatement.executeQuery();
+            
+            // memasukkan model tabel ke dalam tabel model
+            DefaultTableModel tableModel = (DefaultTableModel) tabelBarang.getModel();
+            tableModel.setRowCount(0);
+            while(result.next()){
+                String kodeBarang = result.getString("kode_barang");
+                String namaBarang = result.getString("nama_barang");
+                String merek = result.getString("merk");
+                String hargaJual = String.valueOf(result.getInt("harga_jual"));
+                String hargaBeli = String.valueOf(result.getInt("harga_beli"));
+                String quantity = String.valueOf(result.getInt("quantity"));
+                
+                // memasukkan data ke dalam tabel
+                String tableData[] = {kodeBarang, namaBarang, merek, hargaBeli, hargaJual, quantity};
+                tableModel.addRow(tableData);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }  
     }//GEN-LAST:event_ButtonPencarianActionPerformed
 
     private void inputKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputKodeBarangActionPerformed
@@ -381,7 +419,7 @@ public class ManajemenBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_inputKodeBarangActionPerformed
 
     private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_ButtonXActionPerformed
 
     private void ButtonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonHapusActionPerformed
@@ -397,7 +435,7 @@ public class ManajemenBarang extends javax.swing.JFrame {
             inputHargaBeli.setText("");
             inputHargaJual.setText("");
             inputQuantity.setText("");
-            TableMember();
+            TabelBarang();
         }catch(SQLException e){
             JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(e);
@@ -414,6 +452,37 @@ public class ManajemenBarang extends javax.swing.JFrame {
         inputHargaJual.setText(model.getValueAt(i, 4).toString());
         inputQuantity.setText(model.getValueAt(i, 5).toString());
     }//GEN-LAST:event_tabelBarangMouseClicked
+
+    private void ButtonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonUbahActionPerformed
+        int kodeBarang = Integer.parseInt(inputKodeBarang.getText());
+        String namaBarang = inputNamaBarang.getText();
+        String merek = inputMerekBarang.getText();
+        int hargaBeli = Integer.parseInt(inputHargaBeli.getText());
+        int hargaJual = Integer.parseInt(inputHargaJual.getText());
+        int quantity = Integer.parseInt(inputQuantity.getText());
+        
+        TableModel model = tabelBarang.getModel();
+        try{
+            String sql = "UPDATE data_barang SET nama_barang=?, merk=?, harga_beli=?, harga_jual=?, quantity=? WHERE kode_barang=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, namaBarang);
+            preparedStatement.setString(2, merek);
+            preparedStatement.setInt(3, hargaBeli);
+            preparedStatement.setInt(4, hargaJual);
+            preparedStatement.setInt(5, quantity);
+            preparedStatement.setInt(6, kodeBarang);
+            preparedStatement.executeUpdate();
+            inputKodeBarang.setText("");
+            inputNamaBarang.setText("");
+            inputMerekBarang.setText("");
+            inputHargaBeli.setText("");
+            inputHargaJual.setText("");
+            inputQuantity.setText("");
+            TabelBarang();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ButtonUbahActionPerformed
 
     /**
      * @param args the command line arguments
