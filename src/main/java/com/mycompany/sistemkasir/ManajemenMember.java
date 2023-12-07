@@ -4,6 +4,14 @@
  */
 package com.mycompany.sistemkasir;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author candr
@@ -15,8 +23,34 @@ public class ManajemenMember extends javax.swing.JFrame {
      */
     public ManajemenMember() {
         initComponents();
+        TabelMember();
     }
-
+    Connection connection = DatabaseConnection.getConnection();
+    
+    public void TabelMember(){
+        Statement statement = null;
+        try{
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM member";
+            ResultSet result = statement.executeQuery(sql);
+            
+            // memasukkan model tabel ke dalam tabel model
+            DefaultTableModel tableModel = (DefaultTableModel) tabelMember.getModel();
+            tableModel.setRowCount(0);
+            while(result.next()){
+                String idMember = result.getString("id");
+                String namaMember = result.getString("nama");
+                String nomerHp = result.getString("nomer_hp");
+                String jenisKelamin = result.getString("jenis_kelamin");
+                
+                // memasukkan data ke dalam tabel
+                String tableData[] = {idMember, namaMember, nomerHp, jenisKelamin};
+                tableModel.addRow(tableData);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }   
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,12 +66,10 @@ public class ManajemenMember extends javax.swing.JFrame {
         LabelNamaPelanggan = new javax.swing.JLabel();
         LabelNoHandphone = new javax.swing.JLabel();
         LabelJenisKelamin = new javax.swing.JLabel();
-        LabelIdPenjualan = new javax.swing.JLabel();
-        JawabanIdPelanggan = new javax.swing.JTextField();
-        JawabanNamaPelanggan = new javax.swing.JTextField();
-        JawabanNoHandphone = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        JawabanIdPenjualan = new javax.swing.JTextField();
+        inputIdMember = new javax.swing.JTextField();
+        inputNamaMember = new javax.swing.JTextField();
+        inputNoHp = new javax.swing.JTextField();
+        inputJenisKelamin = new javax.swing.JComboBox<>();
         ButtonTambah = new javax.swing.JButton();
         ButtonUbah = new javax.swing.JButton();
         ButtonHapus = new javax.swing.JButton();
@@ -45,7 +77,7 @@ public class ManajemenMember extends javax.swing.JFrame {
         JawabanCariPelanggan = new javax.swing.JTextField();
         ButtonPencarian = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelMember = new javax.swing.JTable();
         LabelDataPelanggan = new javax.swing.JLabel();
         ButtonX = new javax.swing.JButton();
 
@@ -62,31 +94,28 @@ public class ManajemenMember extends javax.swing.JFrame {
 
         LabelJenisKelamin.setText("Jenis Kelamin");
 
-        LabelIdPenjualan.setText("Id Penjualan");
-
-        JawabanNamaPelanggan.addActionListener(new java.awt.event.ActionListener() {
+        inputNamaMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JawabanNamaPelangganActionPerformed(evt);
+                inputNamaMemberActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
-        jComboBox1.setSelectedItem(2);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        inputJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        inputJenisKelamin.setSelectedItem(2);
+        inputJenisKelamin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        JawabanIdPenjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JawabanIdPenjualanActionPerformed(evt);
+                inputJenisKelaminActionPerformed(evt);
             }
         });
 
         ButtonTambah.setBackground(new java.awt.Color(0, 102, 102));
         ButtonTambah.setForeground(new java.awt.Color(255, 255, 255));
         ButtonTambah.setText("Tambah");
+        ButtonTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonTambahActionPerformed(evt);
+            }
+        });
 
         ButtonUbah.setBackground(new java.awt.Color(0, 102, 102));
         ButtonUbah.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,25 +133,32 @@ public class ManajemenMember extends javax.swing.JFrame {
             }
         });
 
-        ButtonPencarian.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\Tombol Pencarian.png")); // NOI18N
         ButtonPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonPencarianActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelMember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Nama ", "No. Hp", "Jenis Kelamin", "Id Transaksi"
+                "Id", "Nama ", "No. Hp", "Jenis Kelamin"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelMember);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,17 +177,15 @@ public class ManajemenMember extends javax.swing.JFrame {
                                 .addComponent(LabelNamaPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(LabelIdPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(LabelNoHandphone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(LabelJenisKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(LabelIdPenjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(LabelJenisKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(JawabanIdPelanggan)
-                                    .addComponent(JawabanNamaPelanggan)
-                                    .addComponent(JawabanNoHandphone)
-                                    .addComponent(jComboBox1, 0, 151, Short.MAX_VALUE)
-                                    .addComponent(JawabanIdPenjualan)))
+                                    .addComponent(inputIdMember)
+                                    .addComponent(inputNamaMember)
+                                    .addComponent(inputNoHp)
+                                    .addComponent(inputJenisKelamin, 0, 151, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(ButtonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -164,7 +198,7 @@ public class ManajemenMember extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
@@ -174,7 +208,7 @@ public class ManajemenMember extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelIdPelanggan)
-                    .addComponent(JawabanIdPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputIdMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelCariPelanggan)
                     .addComponent(JawabanCariPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,20 +217,16 @@ public class ManajemenMember extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelNamaPelanggan)
-                            .addComponent(JawabanNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputNamaMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelNoHandphone)
-                            .addComponent(JawabanNoHandphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputNoHp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelJenisKelamin)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LabelIdPenjualan)
-                            .addComponent(JawabanIdPenjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
+                            .addComponent(inputJenisKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(101, 101, 101)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ButtonTambah)
                             .addComponent(ButtonUbah))
@@ -211,7 +241,6 @@ public class ManajemenMember extends javax.swing.JFrame {
         LabelDataPelanggan.setText("Data Pelanggan");
 
         ButtonX.setBackground(new java.awt.Color(0, 102, 102));
-        ButtonX.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\OneDrive\\New folder\\SistemKasir\\tombol x.png")); // NOI18N
         ButtonX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonXActionPerformed(evt);
@@ -249,6 +278,10 @@ public class ManajemenMember extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonXActionPerformed
+
     private void ButtonPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPencarianActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonPencarianActionPerformed
@@ -257,21 +290,38 @@ public class ManajemenMember extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JawabanCariPelangganActionPerformed
 
-    private void JawabanIdPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanIdPenjualanActionPerformed
+    private void inputJenisKelaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputJenisKelaminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JawabanIdPenjualanActionPerformed
+    }//GEN-LAST:event_inputJenisKelaminActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void inputNamaMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNamaMemberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_inputNamaMemberActionPerformed
 
-    private void JawabanNamaPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JawabanNamaPelangganActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JawabanNamaPelangganActionPerformed
-
-    private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonXActionPerformed
+    private void ButtonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonTambahActionPerformed
+        String idMember = inputIdMember.getText();
+        String namaMember = inputNamaMember.getText();
+        String nomerHp = inputNoHp.getText();
+        String jenisKelamin = inputJenisKelamin.getSelectedItem().toString();
+        
+        try{
+            String sql = "INSERT into member (id, nama, nomer_hp, jenis_kelamin) value (?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, idMember);
+            preparedStatement.setString(2, namaMember);
+            preparedStatement.setString(3, nomerHp);
+            preparedStatement.setString(4, jenisKelamin);
+            preparedStatement.executeUpdate();
+            TabelMember();
+            inputIdMember.setText("");
+            inputNamaMember.setText("");
+            inputNoHp.setText("");
+        }catch(SQLException e){
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_ButtonTambahActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,21 +365,19 @@ public class ManajemenMember extends javax.swing.JFrame {
     private javax.swing.JButton ButtonUbah;
     private javax.swing.JButton ButtonX;
     private javax.swing.JTextField JawabanCariPelanggan;
-    private javax.swing.JTextField JawabanIdPelanggan;
-    private javax.swing.JTextField JawabanIdPenjualan;
-    private javax.swing.JTextField JawabanNamaPelanggan;
-    private javax.swing.JTextField JawabanNoHandphone;
     private javax.swing.JLabel LabelCariPelanggan;
     private javax.swing.JLabel LabelDataPelanggan;
     private javax.swing.JLabel LabelIdPelanggan;
-    private javax.swing.JLabel LabelIdPenjualan;
     private javax.swing.JLabel LabelJenisKelamin;
     private javax.swing.JLabel LabelNamaPelanggan;
     private javax.swing.JLabel LabelNoHandphone;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField inputIdMember;
+    private javax.swing.JComboBox<String> inputJenisKelamin;
+    private javax.swing.JTextField inputNamaMember;
+    private javax.swing.JTextField inputNoHp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelMember;
     // End of variables declaration//GEN-END:variables
 }
