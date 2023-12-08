@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -124,6 +125,11 @@ public class ManajemenMember extends javax.swing.JFrame {
         ButtonHapus.setBackground(new java.awt.Color(0, 102, 102));
         ButtonHapus.setForeground(new java.awt.Color(255, 255, 255));
         ButtonHapus.setText("Hapus");
+        ButtonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonHapusActionPerformed(evt);
+            }
+        });
 
         LabelCariPelanggan.setText("Cari Pelanggan");
 
@@ -156,6 +162,11 @@ public class ManajemenMember extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tabelMember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelMemberMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabelMember);
@@ -322,6 +333,32 @@ public class ManajemenMember extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_ButtonTambahActionPerformed
+
+    private void ButtonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonHapusActionPerformed
+        String kodeBarang = inputIdMember.getText();
+        try{
+            String sql = "DELETE FROM data_member WHERE id_member = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, kodeBarang);
+            preparedStatement.executeUpdate();
+            TabelMember();
+            inputIdMember.setText("");
+            inputNamaMember.setText("");
+            inputNoHp.setText("");
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_ButtonHapusActionPerformed
+
+    private void tabelMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMemberMouseClicked
+        int i  = tabelMember.getSelectedRow();
+        TableModel model = tabelMember.getModel();
+        inputIdMember.setText(model.getValueAt(i, 0).toString());
+        inputNamaMember.setText(model.getValueAt(i, 1).toString());
+        inputNoHp.setText(model.getValueAt(i, 2).toString());
+        inputJenisKelamin.setSelectedItem(model.getValueAt(i, 3).toString());
+    }//GEN-LAST:event_tabelMemberMouseClicked
 
     /**
      * @param args the command line arguments
