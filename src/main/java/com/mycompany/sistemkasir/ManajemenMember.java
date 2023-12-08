@@ -121,6 +121,11 @@ public class ManajemenMember extends javax.swing.JFrame {
         ButtonUbah.setBackground(new java.awt.Color(0, 102, 102));
         ButtonUbah.setForeground(new java.awt.Color(255, 255, 255));
         ButtonUbah.setText("Ubah");
+        ButtonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonUbahActionPerformed(evt);
+            }
+        });
 
         ButtonHapus.setBackground(new java.awt.Color(0, 102, 102));
         ButtonHapus.setForeground(new java.awt.Color(255, 255, 255));
@@ -359,6 +364,10 @@ public class ManajemenMember extends javax.swing.JFrame {
         inputNoHp.setText(model.getValueAt(i, 2).toString());
         inputJenisKelamin.setSelectedItem(model.getValueAt(i, 3).toString());
     }//GEN-LAST:event_tabelMemberMouseClicked
+
+    private void ButtonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonUbahActionPerformed
+        
+    }//GEN-LAST:event_ButtonUbahActionPerformed
 
     /**
      * @param args the command line arguments
