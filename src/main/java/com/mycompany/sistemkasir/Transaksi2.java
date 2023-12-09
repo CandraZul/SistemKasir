@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,6 +36,14 @@ public class Transaksi2 extends javax.swing.JFrame {
      */
     public Transaksi2() {
         initComponents();
+        dt();
+    }
+    
+    public void dt(){
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
+        String dat = s.format(d);
+        inputTanggal.setText(dat);
     }
     
     public int hitungPoin(){
@@ -78,7 +88,6 @@ public class Transaksi2 extends javax.swing.JFrame {
         inputHarga = new javax.swing.JTextField();
         inputQuantity = new javax.swing.JTextField();
         buttonCari = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         buttonTambah = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -103,6 +112,7 @@ public class Transaksi2 extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         inputPoin = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        inputTanggal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
 
@@ -155,8 +165,6 @@ public class Transaksi2 extends javax.swing.JFrame {
                 buttonCariActionPerformed(evt);
             }
         });
-
-        jLabel9.setText("jLabel9");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 102));
@@ -312,6 +320,13 @@ public class Transaksi2 extends javax.swing.JFrame {
 
         jLabel19.setText("Bonus Poin");
 
+        inputTanggal.setEditable(false);
+        inputTanggal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTanggalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -328,17 +343,17 @@ public class Transaksi2 extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(inputQuantity, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputHarga, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputMerk, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputNamaBarang, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(inputKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonCari, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(inputQuantity, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputHarga, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputMerk, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputNamaBarang, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonCari, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +414,7 @@ public class Transaksi2 extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel9))
+                            .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -434,12 +449,13 @@ public class Transaksi2 extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(inputIdMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(inputTotalItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(inputPoin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel19)))
+                                .addComponent(jLabel19))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(inputTotalItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
@@ -636,7 +652,12 @@ public class Transaksi2 extends javax.swing.JFrame {
     private void inputPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPembayaranActionPerformed
         Double pembayaran = Double.valueOf(inputPembayaran.getText().toString());
         Double kembalian = pembayaran - this.hitungTotalBelanja();
-        inputKembalian.setText(String.valueOf(kembalian));
+        
+        if(kembalian>=0){
+            inputKembalian.setText(String.valueOf(kembalian));
+        }else{
+            JOptionPane.showMessageDialog(this, "Uangnya kurang bang", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_inputPembayaranActionPerformed
 
     private void buttonBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBayarActionPerformed
@@ -645,7 +666,7 @@ public class Transaksi2 extends javax.swing.JFrame {
         LocalDate tanggal = LocalDate.now();
         DefaultTableModel tableModel = (DefaultTableModel) tabelListBarang.getModel();
         
-        if(kembalian>=0){
+        if(kembalian>=0 && !inputTotalBelanja.getText().equals("")){
             try{
                 String sql = "INSERT INTO transaksi (tanggal, total_transaksi, diskon) values (?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -683,6 +704,19 @@ public class Transaksi2 extends javax.swing.JFrame {
                     ps3.executeUpdate();
                 }
                 
+                // mengurangi stok pada tabel data_barang
+                String sql4 = "UPDATE data_barang set quantity=quantity-? WHERE kode_barang=?";
+                PreparedStatement ps4 = connection.prepareStatement(sql4);
+                for(int row=0;row<tableModel.getRowCount();row++){
+                    int stok = Integer.valueOf(tableModel.getValueAt(row, 4).toString());
+                    ps4.setInt(1, stok);
+                    ps4.setInt(2, Integer.valueOf(tableModel.getValueAt(row, 0).toString()));
+                    ps4.executeUpdate();
+                }
+                
+                //reset tabel
+                tableModel.setRowCount(0);
+                
                 JOptionPane.showMessageDialog(this, "Pembayaran Berhasil", "Success", JOptionPane.INFORMATION_MESSAGE);
                 
             }catch(SQLException e){
@@ -695,6 +729,10 @@ public class Transaksi2 extends javax.swing.JFrame {
     private void inputPoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPoinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputPoinActionPerformed
+
+    private void inputTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTanggalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTanggalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -745,6 +783,7 @@ public class Transaksi2 extends javax.swing.JFrame {
     private javax.swing.JTextField inputPembayaran;
     private javax.swing.JTextField inputPoin;
     private javax.swing.JTextField inputQuantity;
+    private javax.swing.JTextField inputTanggal;
     private javax.swing.JTextField inputTotalBelanja;
     private javax.swing.JTextField inputTotalItem;
     private javax.swing.JButton jButton3;
@@ -766,7 +805,6 @@ public class Transaksi2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
