@@ -43,9 +43,10 @@ public class ManajemenMember extends javax.swing.JFrame {
                 String namaMember = result.getString("nama");
                 String nomerHp = result.getString("nomer_hp");
                 String jenisKelamin = result.getString("jenis_kelamin");
+                String point = result.getString("poin");
                 
                 // memasukkan data ke dalam tabel
-                String tableData[] = {idMember, namaMember, nomerHp, jenisKelamin};
+                String tableData[] = {idMember, namaMember, nomerHp, jenisKelamin, point};
                 tableModel.addRow(tableData);
             }
         }catch(SQLException e){
@@ -94,6 +95,8 @@ public class ManajemenMember extends javax.swing.JFrame {
         LabelNoHandphone.setText("No. Handphone");
 
         LabelJenisKelamin.setText("Jenis Kelamin");
+
+        inputIdMember.setEditable(false);
 
         inputNamaMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,17 +155,17 @@ public class ManajemenMember extends javax.swing.JFrame {
 
         tabelMember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nama ", "No. Hp", "Jenis Kelamin"
+                "Id", "Nama ", "No. Hp", "Jenis Kelamin", "poin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -292,10 +295,12 @@ public class ManajemenMember extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 540));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_ButtonXActionPerformed
 
     private void ButtonPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPencarianActionPerformed
@@ -321,12 +326,12 @@ public class ManajemenMember extends javax.swing.JFrame {
         String jenisKelamin = inputJenisKelamin.getSelectedItem().toString();
         
         try{
-            String sql = "INSERT into member (id, nama, nomer_hp, jenis_kelamin) value (?,?,?,?)";
+            String sql = "INSERT into member (nama, nomer_hp, jenis_kelamin, poin) value (?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, idMember);
-            preparedStatement.setString(2, namaMember);
-            preparedStatement.setString(3, nomerHp);
-            preparedStatement.setString(4, jenisKelamin);
+            preparedStatement.setString(1, namaMember);
+            preparedStatement.setString(2, nomerHp);
+            preparedStatement.setString(3, jenisKelamin);
+            preparedStatement.setString(4, "0");
             preparedStatement.executeUpdate();
             TabelMember();
             inputIdMember.setText("");
@@ -342,7 +347,7 @@ public class ManajemenMember extends javax.swing.JFrame {
     private void ButtonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonHapusActionPerformed
         String kodeBarang = inputIdMember.getText();
         try{
-            String sql = "DELETE FROM data_member WHERE id_member = ?";
+            String sql = "DELETE FROM member WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, kodeBarang);
             preparedStatement.executeUpdate();
@@ -366,7 +371,27 @@ public class ManajemenMember extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelMemberMouseClicked
 
     private void ButtonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonUbahActionPerformed
+        int idMember = Integer.parseInt(inputIdMember.getText());
+        String namaMember = inputNamaMember.getText();
+        String nomerHp = inputNoHp.getText();
+        String jenisKelamin = inputJenisKelamin.getSelectedItem().toString();
         
+        TableModel model = tabelMember.getModel();
+        try{
+            String sql = "UPDATE member SET nama=?, nomer_hp=?, jenis_kelamin=?  WHERE id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, namaMember);
+            preparedStatement.setString(2, nomerHp);
+            preparedStatement.setString(3, jenisKelamin);
+            preparedStatement.setInt(4, idMember);
+            preparedStatement.executeUpdate();
+            inputIdMember.setText("");
+            inputNamaMember.setText("");
+            inputNoHp.setText("");
+            TabelMember();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+        }        
     }//GEN-LAST:event_ButtonUbahActionPerformed
 
     /**

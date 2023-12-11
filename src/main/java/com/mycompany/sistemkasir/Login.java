@@ -175,6 +175,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void input_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_usernameActionPerformed
@@ -193,12 +194,16 @@ public class Login extends javax.swing.JFrame {
                     Dashboard dashboardFrame = new Dashboard();
                     dashboardFrame.setVisible(true);
                     userFound = true;
+                    if (userFound = true){
+                        this.dispose();
+                    }
                     break;
                 }
             }
             if (!userFound) {
                 JOptionPane.showMessageDialog(this, "Username or Password wrong", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             }
+            
         }catch(SQLException e){
             System.out.println(e);
         }        // TODO add your handling code here:
