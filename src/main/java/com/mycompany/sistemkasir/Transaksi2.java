@@ -65,6 +65,41 @@ public class Transaksi2 extends javax.swing.JFrame {
         return totalBelanja;
     }
     
+    public void cetakStruk(){
+        DefaultTableModel tableModel = (DefaultTableModel) tabelListBarang.getModel();
+        
+        struk.setText("                                   AULMART\n");
+        struk.setText(struk.getText()+"                  Jl. A. Yani No.200, Kec. Kartasura\n");
+        struk.setText(struk.getText()+"                          NPWP: 000-0000-000\n");
+        struk.setText(struk.getText()+"-----------------------------------------------------------------\n");
+        struk.setText(struk.getText()+"Barang \t Harga \t Jumlah \t Total\n");
+        struk.setText(struk.getText()+"-----------------------------------------------------------------\n");
+        
+        for(int row=0;row<tableModel.getRowCount();row++){
+            String barang = tableModel.getValueAt(row, 2).toString();
+            String harga = tableModel.getValueAt(row, 3).toString();
+            String jumlah = tableModel.getValueAt(row, 4).toString();
+            String total = tableModel.getValueAt(row, 5).toString();
+            
+            struk.setText(struk.getText()+barang+" \t "+harga+" \t "+jumlah+" \t "+total+"\n");
+        }
+        
+        struk.setText(struk.getText()+"-----------------------------------------------------------------\n");
+        struk.setText(struk.getText()+"Total item \t\t\t"+inputTotalItem.getText().toString()+"\n");
+        struk.setText(struk.getText()+"Discount \t\t\t"+inputDiscount.getText().toString()+"\n");
+        struk.setText(struk.getText()+"Bonus Poin \t\t\t"+inputPoin.getText().toString()+"\n");
+        struk.setText(struk.getText()+"Total belanja \t\t\t"+inputTotalBelanja.getText().toString()+"\n");
+        struk.setText(struk.getText()+"Tunai \t\t\t"+inputPembayaran.getText().toString()+"\n");
+        struk.setText(struk.getText()+"Kembalian \t\t\t"+inputKembalian.getText().toString()+"\n");
+        
+        struk.setText(struk.getText()+"-----------------------------------------------------------------\n");
+        struk.setText(struk.getText()+"Tgl. "+inputTanggal.getText().toString()+"\n");
+        struk.setText(struk.getText()+"-----------------------------------------------------------------\n");
+        struk.setText(struk.getText()+"                           MERCI BEAUCOUP!\n");
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +109,10 @@ public class Transaksi2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        struk = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -115,6 +154,40 @@ public class Transaksi2 extends javax.swing.JFrame {
         inputTanggal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+
+        jDialog1.setLocationByPlatform(true);
+        jDialog1.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jDialog1WindowClosed(evt);
+            }
+        });
+
+        struk.setEditable(false);
+        struk.setColumns(20);
+        struk.setRows(5);
+        jScrollPane2.setViewportView(struk);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -669,6 +742,7 @@ public class Transaksi2 extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) tabelListBarang.getModel();
         
         if(kembalian>=0 && !inputTotalBelanja.getText().equals("")){
+            inputKembalian.setText(String.valueOf(kembalian));
             try{
                 String sql = "INSERT INTO transaksi (tanggal, total_transaksi, diskon) values (?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -717,10 +791,23 @@ public class Transaksi2 extends javax.swing.JFrame {
                 }
                 
                 //reset tabel
-                tableModel.setRowCount(0);
+//                tableModel.setRowCount(0);
                 
                 JOptionPane.showMessageDialog(this, "Pembayaran Berhasil", "Success", JOptionPane.INFORMATION_MESSAGE);
+                this.cetakStruk();
+                this.jDialog1.setSize(300, 435);
+                this.jDialog1.setVisible(true);
                 
+                
+                //reset
+//                tableModel.setRowCount(0);
+//                kategori.setSelectedItem("Non-member");
+////                inputPoin.setText("");
+////                inputDiscount.setText("");
+//                inputTotalItem.setText("");
+//                inputTotalBelanja.setText("");
+//                inputPembayaran.setText("");
+//                inputKembalian.setText("");
             }catch(SQLException e){
                 System.out.println(e);
             }
@@ -735,6 +822,10 @@ public class Transaksi2 extends javax.swing.JFrame {
     private void inputTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTanggalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTanggalActionPerformed
+
+    private void jDialog1WindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog1WindowClosed
+
+    }//GEN-LAST:event_jDialog1WindowClosed
 
     /**
      * @param args the command line arguments
@@ -790,6 +881,7 @@ public class Transaksi2 extends javax.swing.JFrame {
     private javax.swing.JTextField inputTotalItem;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -810,8 +902,11 @@ public class Transaksi2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> kategori;
+    private javax.swing.JTextArea struk;
     private javax.swing.JTable tabelListBarang;
     // End of variables declaration//GEN-END:variables
 }
