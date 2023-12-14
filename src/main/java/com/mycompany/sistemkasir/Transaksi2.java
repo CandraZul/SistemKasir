@@ -773,7 +773,7 @@ public class Transaksi2 extends javax.swing.JFrame {
                 if(!(inputIdMember.getText().toString().equals(""))){
                     int idMember = Integer.valueOf(inputIdMember.getText().toString());
                     poin += Integer.valueOf(inputPoin.getText().toString());
-                    String sql3 = "UPDATE member SET poin=? WHERE id=?";
+                    String sql3 = "UPDATE member SET poin=poin+? WHERE id=?";
                     PreparedStatement ps3 = connection.prepareStatement(sql3);
                     ps3.setInt(1, poin);
                     ps3.setInt(2, idMember);
@@ -800,14 +800,14 @@ public class Transaksi2 extends javax.swing.JFrame {
                 
                 
                 //reset
-//                tableModel.setRowCount(0);
-//                kategori.setSelectedItem("Non-member");
-////                inputPoin.setText("");
-////                inputDiscount.setText("");
-//                inputTotalItem.setText("");
-//                inputTotalBelanja.setText("");
-//                inputPembayaran.setText("");
-//                inputKembalian.setText("");
+                tableModel.setRowCount(0);
+                kategori.setSelectedItem("Non-member");
+                inputPoin.setText("");
+                inputDiscount.setText("");
+                inputTotalItem.setText("");
+                inputTotalBelanja.setText("");
+                inputPembayaran.setText("");
+                inputKembalian.setText("");
             }catch(SQLException e){
                 System.out.println(e);
             }
