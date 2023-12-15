@@ -147,6 +147,9 @@ public class ManajemenMember extends javax.swing.JFrame {
             }
         });
 
+        ButtonPencarian.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonPencarian.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonPencarian.setText("🔎");
         ButtonPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonPencarianActionPerformed(evt);
@@ -215,7 +218,8 @@ public class ManajemenMember extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(JawabanCariPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(ButtonPencarian)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -259,7 +263,10 @@ public class ManajemenMember extends javax.swing.JFrame {
         LabelDataPelanggan.setForeground(new java.awt.Color(255, 255, 255));
         LabelDataPelanggan.setText("Data Pelanggan");
 
-        ButtonX.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonX.setBackground(new java.awt.Color(255, 0, 51));
+        ButtonX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ButtonX.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonX.setText("X");
         ButtonX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonXActionPerformed(evt);
@@ -274,18 +281,18 @@ public class ManajemenMember extends javax.swing.JFrame {
                 .addGap(295, 295, 295)
                 .addComponent(LabelDataPelanggan)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonX)
                 .addGap(29, 29, 29))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonX)
+                .addGap(13, 13, 13)
                 .addComponent(LabelDataPelanggan)
                 .addGap(26, 26, 26)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

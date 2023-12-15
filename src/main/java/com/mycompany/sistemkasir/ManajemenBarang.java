@@ -187,6 +187,9 @@ public class ManajemenBarang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelBarang);
 
+        ButtonPencarian.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonPencarian.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonPencarian.setText("🔎");
         ButtonPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonPencarianActionPerformed(evt);
@@ -242,8 +245,8 @@ public class ManajemenBarang extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(inputCariBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(106, 106, 106))
+                                .addComponent(ButtonPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(136, 136, 136)
                                 .addComponent(ButtonTambah)
@@ -294,6 +297,10 @@ public class ManajemenBarang extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        ButtonX.setBackground(new java.awt.Color(255, 0, 51));
+        ButtonX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ButtonX.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonX.setText("X");
         ButtonX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonXActionPerformed(evt);
@@ -304,14 +311,14 @@ public class ManajemenBarang extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonX, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonX)
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
